@@ -23,6 +23,8 @@ for filename in os.listdir(current_directory):
         # tags intersect
         matched_filenames.append(filename)
 
+if not matched_filenames:
+    print >>sys.stdout, "Hmm.. no matching files"
+    
 for f in matched_filenames:
     webbrowser.open(f)
-
