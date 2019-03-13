@@ -1,15 +1,15 @@
 #!/usr/bin/env python
+from __future__ import print_function
 
 import os
 import sys
-import subprocess
 import webbrowser
 
 current_directory = os.getcwd()
 tags = sys.argv[1:]
 
 if not tags:
-    print >>sys.stderr, "Hey, you need to give me some tags"
+    print("Hey, you need to give me some tags", file=sys.stderr)
     sys.exit(1)
 
 tags = set([t.lower() for t in tags])
@@ -24,7 +24,9 @@ for filename in os.listdir(current_directory):
         matched_filenames.append(filename)
 
 if not matched_filenames:
-    print >>sys.stdout, "Hmm.. no matching files"
+    print("Hmm.. no matching files", file=sys.stdout)
     
 for f in matched_filenames:
-    webbrowser.open(f)
+    browser_friendly_path = "file://{}".format(os.path.abspath(f))
+    print(browser_friendly_path)
+    webbrowser.open(browser_friendly_path)
